@@ -1,0 +1,35 @@
+{
+  "name": "dynamoose-sls-crud",
+  "author": "José Antonio Reyes",
+  "version": "1.0.0",
+  "private": false,
+  "scripts": {
+    "updateFn": "serverless deploy -f $SLS_FN && serverless invoke -f $SLS_FN -l",
+    "deployAllServices": "chmod +x ./deploy-all-services.sh && sh ./deploy-all-services.sh"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "babel-runtime": "^6.26.0",
+    "dynamoose": "^0.8.6",
+    "parse-error": "^0.2.0",
+    "uuid": "^3.1.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "husky": "^0.14.3",
+    "lint-staged": "^6.0.0",
+    "prettier": "^1.10.2",
+    "serverless-webpack": "^4.2.0",
+    "uglifyjs-webpack-plugin": "^1.1.6",
+    "webpack": "^3.10.0"
+  }
+}

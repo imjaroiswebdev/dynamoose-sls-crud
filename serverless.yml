@@ -1,0 +1,91 @@
+service: dynamoose-crud
+package:
+  individually: true
+  excludeDevDependencies: true
+
+frameworkVersion: ">=1.1.0 <2.0.0"
+
+plugins:
+  - serverless-webpack
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  stage: ${opt:stage, 'dev'}
+  region: us-east-1
+  environment:
+      ITEM_TABLE: item-dynacrud-${opt:stage, self:provider.stage}
+
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:*
+      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.ITEM_TABLE}"
+
+functions:
+  # getById:
+  #   handler: handlers/get.getById
+  #   events:
+  #     - http:
+  #         path: api/item/:id
+  #         method: get
+  #         cors: true
+
+  # listAll:
+  #   handler: handlers/list.listAll
+  #   events:
+  #     - http:
+  #         path: api/items
+  #         method: get
+  #         cors: true
+
+  # addOne:
+  #   handler: handlers/add.addOne
+  #   events:
+  #     - http:
+  #         path: api/add/one
+  #         method: post
+  #         cors: true
+
+  batchAdd:
+    handler: handlers/batchAdd.batchAdd
+    events:
+      - http:
+          path: api/add/batch
+          method: post
+          cors: true
+
+  # updateOne:
+  #   handler: handlers/update.updateOne
+  #   events:
+  #     - http:
+  #         path: api/item/:id
+  #         method: put
+  #         cors: true
+
+  # deleteOne:
+  #   handler: handlers/delete.deleteOne
+  #   events:
+  #     - http:
+  #         path: api/item/:id
+  #         method: delete
+  #         cors: true
+
+resources:
+  Resources:
+    userTable:
+      Type: 'AWS::DynamoDB::Table'
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          -
+            AttributeName: id
+            AttributeType: S
+        KeySchema:
+          -
+            AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ${self:provider.environment.ITEM_TABLE}
