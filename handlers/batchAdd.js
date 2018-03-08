@@ -4,39 +4,40 @@ if (!global._babelPolyfill) {
 
 import { Item } from '../models/item' // eslint-disable-line
 import pe from 'parse-error' // eslint-disable-line
+import uuid from 'uuid/v1' // eslint-disable-line
 
-export const batchAdd = async (event, context, callback) => {
-  // *** Soporte para captura de errores
-  const to = promise =>
-  promise
-    .then(data => [null, data])
-    .catch(err => [pe(err)])
-
+export const batchAdd = async ({ body }, context, callback) => {
+  // *** Error handling support in promises
   const handleErr = (errData) => {
     console.error(' => ERROR:', errData.stack)
     callback(errData.stack, null)
   }
 
-  const mockList = [
-    {
-      id: "1",
-      name: "Item 1"
-    },
-    {
-      id: "2",
-      name: "Item 2"
-    },
-    {
-      id: "3",
-      name: "Item 3"
+  const [err, items] = await to(Promise.all(addItems(body)))
+  if (err) {
+    handleErr(err)
+  } else {
+    const response = {
+      statusCode: 200,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(items)
     }
-  ]
 
-  const response = {
-    statusCode: 200,
-    body: JSON.stringify(mockList)
+    console.log(` => Items stored: ${items.length}`)
+    callback(null, response)
   }
+}
 
-  console.log(` => event:`, event)
-  callback(null, response)
+const to = promise =>
+  promise
+    .then(data => [null, data])
+    .catch(err => [pe(err)])
+
+const addItems = data => {
+  const itemsData = JSON.parse(data)
+  if (itemsData.length && typeof itemsData.length !== 'string') {
+    return itemsData.map(item => Item.create(item))
+  } else {
+    throw new Error('Type of items to add must be an array')
+  }
 }
