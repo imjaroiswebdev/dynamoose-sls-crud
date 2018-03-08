@@ -17,6 +17,7 @@
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
+    "babel-plugin-source-map-support": "^2.0.1",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-stage-2": "^6.24.1",
@@ -30,6 +31,7 @@
     "lint-staged": "^6.0.0",
     "prettier": "^1.10.2",
     "serverless-webpack": "^4.2.0",
+    "source-map-support": "^0.5.3",
     "uglifyjs-webpack-plugin": "^1.1.6",
     "webpack": "^3.10.0"
   }
