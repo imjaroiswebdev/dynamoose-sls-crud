@@ -10,6 +10,11 @@ module.exports = {
     filename: '[name].js'
   },
   devtool: 'source-map',
+  mode: 'development',
+  externals: ['aws-sdk'],
+  stats: slsw.lib.webpack.isLocal
+    ? 'errors-only'
+    : 'normal',
   module: {
     rules: [
       {
@@ -26,6 +31,5 @@ module.exports = {
         ]
       }
     ]
-  },
-  externals: ['aws-sdk']
+  }
 }

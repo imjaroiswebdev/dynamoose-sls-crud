@@ -8,6 +8,11 @@ frameworkVersion: ">=1.1.0 <2.0.0"
 plugins:
   - serverless-webpack
 
+custom:
+  webpack:
+    packager: 'yarn'
+    packExternalModulesMaxBuffer: 200 * 1024   # Size of stdio buffers for spawned child processes
+
 provider:
   name: aws
   runtime: nodejs6.10
