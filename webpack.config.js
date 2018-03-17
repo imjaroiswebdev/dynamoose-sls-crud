@@ -1,16 +1,15 @@
 const path = require('path')
 const slsw = require('serverless-webpack')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = {
   target: 'node',
   entry: slsw.lib.entries,
   output: {
-    libraryTarget: 'commonjs2',
+    libraryTarget: 'commonjs',
     path: path.join(__dirname, '.webpack'),
     filename: '[name].js'
   },
-  devtool: 'eval',
+  devtool: 'source-map',
   module: {
     rules: [
       {
@@ -28,8 +27,5 @@ module.exports = {
       }
     ]
   },
-  externals: ['aws-sdk'],
-  plugins: [
-    new UglifyJsPlugin()
-  ]
+  externals: ['aws-sdk']
 }

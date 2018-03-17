@@ -35,8 +35,11 @@ const to = promise =>
 
 const addItems = data => {
   const itemsData = JSON.parse(data)
-  if (itemsData.length && typeof itemsData.length !== 'string') {
-    return itemsData.map(item => Item.create(item))
+  if (itemsData.length && typeof itemsData !== 'string') {
+    return itemsData.map(item => Item.create({
+      id: uuid(),
+      ...item
+    }))
   } else {
     throw new Error('Type of items to add must be an array')
   }
