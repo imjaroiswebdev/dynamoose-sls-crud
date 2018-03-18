@@ -28,21 +28,21 @@ provider:
       Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.ITEM_TABLE}"
 
 functions:
-  # getById:
-  #   handler: handlers/get.getById
-  #   events:
-  #     - http:
-  #         path: api/item/:id
-  #         method: get
-  #         cors: true
+  getById:
+    handler: handlers/get.getById
+    events:
+      - http:
+          path: api/item/{id}
+          method: get
+          cors: true
 
-  # listAll:
-  #   handler: handlers/list.listAll
-  #   events:
-  #     - http:
-  #         path: api/items
-  #         method: get
-  #         cors: true
+  listAll:
+    handler: handlers/list.listAll
+    events:
+      - http:
+          path: api/items
+          method: get
+          cors: true
 
   addOne:
     handler: handlers/add.addOne
@@ -60,21 +60,21 @@ functions:
           method: post
           cors: true
 
-  # updateOne:
-  #   handler: handlers/update.updateOne
-  #   events:
-  #     - http:
-  #         path: api/item/:id
-  #         method: put
-  #         cors: true
+  updateOne:
+    handler: handlers/update.updateOne
+    events:
+      - http:
+          path: api/item/{id}
+          method: put
+          cors: true
 
-  # deleteOne:
-  #   handler: handlers/delete.deleteOne
-  #   events:
-  #     - http:
-  #         path: api/item/:id
-  #         method: delete
-  #         cors: true
+  deleteOne:
+    handler: handlers/delete.deleteOne
+    events:
+      - http:
+          path: api/item/{id}
+          method: delete
+          cors: true
 
 resources:
   Resources:
