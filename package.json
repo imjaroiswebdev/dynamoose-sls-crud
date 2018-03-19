@@ -1,12 +1,13 @@
 {
   "name": "dynamoose-sls-crud",
   "author": "José Antonio Reyes",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/imjaroiswebdev/dynamoose-sls-crud"
+  },
   "version": "1.0.0",
   "private": false,
-  "scripts": {
-    "updateFn": "serverless deploy -f $SLS_FN && serverless invoke -f $SLS_FN -l",
-    "deployAllServices": "chmod +x ./deploy-all-services.sh && sh ./deploy-all-services.sh"
-  },
+  "scripts": {},
   "dependencies": {
     "babel-polyfill": "^6.26.0",
     "babel-runtime": "^6.26.0",
