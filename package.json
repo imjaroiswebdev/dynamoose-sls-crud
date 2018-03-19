@@ -27,11 +27,7 @@
     "eslint-plugin-node": "^6.0.1",
     "eslint-plugin-promise": "^3.6.0",
     "eslint-plugin-standard": "^3.0.1",
-    "husky": "^0.14.3",
-    "lint-staged": "^6.0.0",
-    "prettier": "^1.10.2",
     "serverless-webpack": "^5.1.0",
-    "source-map-support": "^0.5.3",
     "webpack": "^4.1.1"
   }
 }
